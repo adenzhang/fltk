@@ -64,6 +64,13 @@ configure_file(
  @ONLY
  )
 
+# jz: copy generated files to source tree in case that fltk cmake is included by externals.
+configure_file(
+ ${CMAKE_CURRENT_SOURCE_DIR}/abi-version.cmake.in
+ ${CMAKE_CURRENT_SOURCE_DIR}/FL/abi-version.h
+ @ONLY
+ )
+
 #######################################################################
 # build examples - these have to be built after fluid is built/imported
 #######################################################################

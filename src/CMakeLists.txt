@@ -276,6 +276,9 @@ endif (USE_XFT)
 
 FL_ADD_LIBRARY(fltk STATIC "${STATIC_FILES}")
 target_link_libraries(fltk ${OPTIONAL_LIBS})
+target_include_directories( fltk PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
+)
 
 #######################################################################
 
@@ -291,18 +294,27 @@ if (OPTION_USE_SYSTEM_LIBJPEG)
     target_link_libraries(fltk_images ${FLTK_JPEG_LIBRARIES})
 else()
     target_link_libraries(fltk_images fltk_jpeg)
+    target_include_directories( fltk_images PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../jpeg>
+    )
 endif (OPTION_USE_SYSTEM_LIBJPEG)
 
 if (OPTION_USE_SYSTEM_ZLIB)
     target_link_libraries(fltk_images ${FLTK_ZLIB_LIBRARIES})
 else()
     target_link_libraries(fltk_images fltk_z)
+    target_include_directories( fltk_images PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../zlib>
+    )
 endif (OPTION_USE_SYSTEM_ZLIB)
 
 if (OPTION_USE_SYSTEM_LIBPNG)
     target_link_libraries(fltk_images ${FLTK_PNG_LIBRARIES})
 else()
     target_link_libraries(fltk_images fltk_png)
+    target_include_directories( fltk_images PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../png>
+    )
 endif (OPTION_USE_SYSTEM_LIBPNG)
 
 #######################################################################
